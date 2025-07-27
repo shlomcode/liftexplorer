@@ -2,7 +2,7 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.2, user-scalable=yes">
     <title>Lift Explorer | Home</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -544,173 +544,194 @@
             }
         }
 
-        /* Ottimizzazioni per schermi piccoli (telefoni, < 480px) */
+        /* Completamente diverso per telefoni (< 480px) */
         @media (max-width: 480px) {
             body {
-                font-size: 14px; /* Base font più piccolo per compattezza */
+                font-size: 12px; /* Font di base molto piccolo */
+                line-height: 1.4;
             }
 
             header {
-                padding: 0.6rem 0.8rem;
+                padding: 0.5rem 0.6rem;
+            }
+
+            .header-container {
+                flex-direction: column;
+                align-items: flex-start;
             }
 
             .logo-icon {
-                width: 28px;
-                height: 28px;
-                font-size: 0.9rem;
+                width: 24px;
+                height: 24px;
+                font-size: 0.8rem;
             }
 
             .logo-text {
-                font-size: 1.1rem;
+                font-size: 1rem;
             }
 
             nav ul {
-                gap: 0.5rem;
+                flex-direction: column;
+                gap: 0.4rem;
+                width: 100%;
+                align-items: flex-start;
             }
 
             nav a {
-                font-size: 0.8rem;
-                padding: 0.3rem 0;
+                font-size: 0.75rem;
+                padding: 0.2rem 0;
+                display: block;
             }
 
             .nav-cta {
-                padding: 0.3rem 1rem;
-                font-size: 0.8rem;
-                margin-top: 0.5rem;
+                padding: 0.3rem 0.8rem;
+                font-size: 0.75rem;
+                margin-left: 0;
+                width: auto;
+                display: inline-block;
             }
 
             .hero {
-                padding: 1.5rem 0.8rem;
+                padding: 1rem 0.6rem;
             }
 
             .hero-container {
-                gap: 1.5rem;
+                gap: 1rem;
             }
 
             .hero-title {
-                font-size: 1.6rem;
-                line-height: 1.3;
-                margin-bottom: 1rem;
+                font-size: 1.4rem;
+                line-height: 1.2;
+                margin-bottom: 0.8rem;
             }
 
             .hero-subtitle {
-                font-size: 0.9rem;
+                font-size: 0.8rem;
                 max-width: 100%;
-                margin-bottom: 1.2rem;
+                margin-bottom: 1rem;
             }
 
             .hero-cta {
-                padding: 0.6rem 1.2rem;
-                font-size: 0.8rem;
+                padding: 0.5rem 1rem;
+                font-size: 0.75rem;
             }
 
             .hero-image {
                 max-width: 100%;
-                animation: none; /* Disabilita animazione float */
+                animation: none;
             }
 
             .hero-image img {
                 border-radius: var(--radius-sm);
+                aspect-ratio: 4/3; /* Più compatto */
             }
 
             .features-section {
-                margin: 1.5rem auto;
-                padding: 0 0.8rem;
+                margin: 1rem auto;
+                padding: 0 0.6rem;
             }
 
             .section-title {
-                margin-bottom: 2rem;
+                margin-bottom: 1.5rem;
             }
 
             .section-title h2 {
-                font-size: 1.4rem;
+                font-size: 1.2rem;
             }
 
             .section-title::after {
-                width: 60px;
-                height: 3px;
+                width: 50px;
+                height: 2px;
             }
 
             .features-grid {
-                gap: 1rem;
-            }
-
-            .feature-card {
-                padding: 1.2rem;
-            }
-
-            .feature-icon {
-                width: 45px;
-                height: 45px;
-                font-size: 1.2rem;
-                margin-bottom: 0.8rem;
-            }
-
-            .feature-card h3 {
-                font-size: 1rem;
-            }
-
-            .feature-card p {
-                font-size: 0.8rem;
-                margin-bottom: 1rem;
-            }
-
-            .feature-cta {
-                padding: 0.5rem 1rem;
-                font-size: 0.8rem;
-            }
-
-            footer {
-                padding: 1.5rem 0.8rem;
-            }
-
-            .footer-container {
-                gap: 1.5rem;
-            }
-
-            .footer-logo-icon {
-                width: 20px;
-                height: 20px;
-                font-size: 0.7rem;
-            }
-
-            .footer-logo-text {
-                font-size: 0.9rem;
-            }
-
-            .footer-about p {
-                font-size: 0.8rem;
-                line-height: 1.4;
-            }
-
-            .social-links {
                 gap: 0.8rem;
             }
 
-            .social-link {
-                width: 30px;
-                height: 30px;
+            .feature-card {
+                padding: 1rem;
+                box-shadow: var(--shadow-sm);
             }
 
-            .footer-links h3 {
+            .feature-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+                margin-bottom: 0.6rem;
+            }
+
+            .feature-card h3 {
                 font-size: 0.9rem;
+                margin-bottom: 0.4rem;
+            }
+
+            .feature-card p {
+                font-size: 0.7rem;
+                margin-bottom: 0.8rem;
+            }
+
+            .feature-cta {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.7rem;
+            }
+
+            footer {
+                padding: 1rem 0.6rem;
+            }
+
+            .footer-container {
+                gap: 1rem;
+                grid-template-columns: 1fr; /* Una colonna per compattezza */
+            }
+
+            .footer-logo-icon {
+                width: 18px;
+                height: 18px;
+                font-size: 0.6rem;
+            }
+
+            .footer-logo-text {
+                font-size: 0.8rem;
+            }
+
+            .footer-about p {
+                font-size: 0.7rem;
+                line-height: 1.3;
                 margin-bottom: 1rem;
             }
 
-            .footer-links a {
+            .social-links {
+                gap: 0.6rem;
+            }
+
+            .social-link {
+                width: 28px;
+                height: 28px;
+            }
+
+            .footer-links h3 {
                 font-size: 0.8rem;
+                margin-bottom: 0.8rem;
+            }
+
+            .footer-links a {
+                font-size: 0.7rem;
             }
 
             .footer-newsletter input,
             .footer-newsletter button {
-                padding: 0.5rem;
-                font-size: 0.8rem;
+                padding: 0.4rem;
+                font-size: 0.7rem;
+            }
+
+            .footer-newsletter p {
+                font-size: 0.7rem;
             }
 
             .footer-bottom {
-                font-size: 0.75rem;
-                padding-top: 1.5rem;
-                margin-top: 1.5rem;
+                font-size: 0.7rem;
+                padding-top: 1rem;
+                margin-top: 1rem;
             }
         }
     </style>
