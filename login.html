@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lift Explorer | Login e Registrazione</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Variables - Alpine Theme */
+        :root {
+            --primary: #2B9348;
+            --primary-dark: #218838;
+            --primary-light: #E6F4EA;
+            --secondary: #FF9E00;
+            --secondary-dark: #E68A00;
+            --accent: #D90429;
+            --text: #2D3748;
+            --text-light: #718096;
+            --bg: #FFFFFF;
+            --card-bg: #F8F9FA;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.12);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 25px rgba(0,0,0,0.1);
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text);
+            background-color: var(--bg);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Alpine Background Pattern */
+        .alpine-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPgogIDxkZWZzPgogICAgPHBhdHRlcm4gaWQ9Im1vdW50YWlucyIgd2lkdGg9IjEwMCIgaGVpZ2h0PSIxMDAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHBhdHRlcm5UcmFuc2Zvcm09InJvdGF0ZSgxNSkiPgogICAgICA8cGF0aCBkPSJNMCwwIEwxMDAsMTAwIE0tMjAsNTAgTDEyMCw1MCBNMCwxMDAgTDEwMCwwIiBzdHJva2U9InJnYmEoNDMsMTQ3LDcyLDAuMDMpIiBzdHJva2Utd2lkdGg9IjEiLz4KICAgIDwvcGF0dGVybj4KICA8L2RlZnM+CiAgPHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNtb3VudGFpbnMpIiBvcGFjaXR5PSIwLjAzIi8+Cjwvc3ZnPg==');
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Main Container */
+        .auth-container {
+            max-width: 900px;
+            width: 100%;
+            margin: 2rem;
+            display: flex;
+            background: var(--bg);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Left Side - Branding */
+        .auth-branding {
+            flex: 1;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 3rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+        }
+
+        .auth-branding::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1605540436563-5bca919ae766?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80') no-repeat center/cover;
+            opacity: 0.2;
+            z-index: 0;
+        }
+
+        .auth-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 2rem;
+            z-index: 1;
+        }
+
+        .auth-logo-icon {
+            width: 50px;
+            height: 50px;
+            background: white;
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-weight: bold;
+            font-size: 1.5rem;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .auth-logo-text {
+            font-size: 2rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        .auth-branding h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            z-index: 1;
+        }
+
+        .auth-branding p {
+            font-size: 1rem;
+            opacity: 0.8;
+            max-width: 300px;
+            z-index: 1;
+        }
+
+        /* Right Side - Auth Forms */
+        .auth-form {
+            flex: 1;
+            padding: 3rem;
+            background: var(--bg);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        /* Tabs */
+        .auth-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .auth-tab {
+            padding: 0.8rem 1.5rem;
+            background: var(--card-bg);
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .auth-tab.active {
+            background: linear-gradient(to right, var(--primary), var(--primary-dark));
+            color: white;
+        }
+
+        .auth-tab:hover:not(.active) {
+            background: #edf2f7;
+        }
+
+        /* Form Styles */
+        .form-container {
+            display: none;
+        }
+
+        .form-container.active {
+            display: block;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--text);
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: var(--radius-sm);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(43, 147, 72, 0.2);
+        }
+
+        /* Progressive Registration Steps */
+        .progress-container {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .progress-container::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: #e2e8f0;
+            z-index: 0;
+        }
+
+        .progress-step {
+            width: 40px;
+            height: 40px;
+            background: #e2e8f0;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            color: var(--text-light);
+            z-index: 1;
+            transition: var(--transition);
+        }
+
+        .progress-step.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .progress-step.completed {
+            background: var(--primary-dark);
+            color: white;
+        }
+
+        .progress-step span {
+            font-size: 0.9rem;
+        }
+
+        .form-step {
+            display: none;
+        }
+
+        .form-step.active {
+            display: block;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        /* Buttons */
+        .auth-btn {
+            background: linear-gradient(to right, var(--primary), var(--primary-dark));
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            font-weight: 600;
+            width: 100%;
+            transition: var(--transition);
+        }
+
+        .auth-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(43, 147, 72, 0.3);
+        }
+
+        .auth-btn.secondary {
+            background: var(--card-bg);
+            color: var(--text);
+            margin-top: 1rem;
+        }
+
+        .auth-btn.secondary:hover {
+            background: #edf2f7;
+        }
+
+        /* Social Login */
+        .social-login {
+            margin-top: 2rem;
+            text-align: center;
+        }
+
+        .social-login p {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-bottom: 1rem;
+        }
+
+        .LIBRARY {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .social-btn {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--card-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text);
+            transition: var(--transition);
+        }
+
+        .social-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .auth-container {
+                flex-direction: column;
+                margin: 1rem;
+            }
+
+            .auth-branding {
+                padding: 2rem;
+                text-align: center;
+            }
+
+            .auth-branding p {
+                margin: 0 auto;
+            }
+
+            .auth-form {
+                padding: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .progress-container {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+
+            .progress-container::before {
+                display: none;
+            }
+
+            .progress-step {
+                width: 100%;
+                height: auto;
+                border-radius: var(--radius-sm);
+                padding: 0.5rem 1rem;
+                text-align: left;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="alpine-pattern"></div>
+    <div class="auth-container">
+        <!-- Branding Side -->
+        <div class="auth-branding">
+            <div class="auth-logo">
+                <div class="auth-logo-icon">LE</div>
+                <div class="auth-logo-text">Lift Explorer</div>
+            </div>
+            <h2>Scopri le Montagne</h2>
+            <p>Unisciti alla community di Lift Explorer per esplorare impianti sciistici, salvare i tuoi preferiti e condividere le tue avventure!</p>
+        </div>
+
+        <!-- Form Side -->
+        <div class="auth-form">
+            <div class="auth-tabs">
+                <div class="auth-tab active" data-target="login">Login</div>
+                <div class="auth-tab" data-target="register">Registrazione</div>
+            </div>
+
+            <!-- Login Form -->
+            <div class="form-container active" id="login">
+                <form>
+                    <div class="form-group">
+                        <label for="login-email">Email</label>
+                        <input type="email" id="login-email" placeholder="Inserisci la tua email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password">Password</label>
+                        <input type="password" id="login-password" placeholder="Inserisci la tua password" required>
+                    </div>
+                    <button type="submit" class="auth-btn">Accedi</button>
+                    <button type="button" class="auth-btn secondary">Hai dimenticato la password?</button>
+                </form>
+                <div class="social-login">
+                    <p>Oppure accedi con</p>
+                    <div class="social-btns">
+                        <div class="social-btn"><i class="fab fa-facebook-f"></i></div>
+                        <div class="social-btn"><i class="fab fa-google"></i></div>
+                        <div class="social-btn"><i class="fab fa-apple"></i></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Registration Form (Progressive) -->
+            <div class="form-container" id="register">
+                <div class="progress-container">
+                    <div class="progress-step active" data-step="1"><span>1</span></div>
+                    <div class="progress-step" data-step="2"><span>2</span></div>
+                    <div class="progress-step" data-step="3"><span>3</span></div>
+                </div>
+
+                <form>
+                    <!-- Step 1: Basic Info -->
+                    <div class="form-step active" id="step-1">
+                        <div class="form-group">
+                            <label for="reg-email">Email</label>
+                            <input type="email" id="reg-email" placeholder="Inserisci la tua email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="reg-password">Password</label>
+                            <input type="password" id="reg-password" placeholder="Crea una password" required>
+                        </div>
+                        <button type="button" class="auth-btn" onclick="nextStep(2)">Avanti</button>
+                    </div>
+
+                    <!-- Step 2: Personal Info -->
+                    <div class="form-step" id="step-2">
+                        <div class="form-group">
+                            <label for="reg-name">Nome</label>
+                            <input type="text" id="reg-name" placeholder="Inserisci il tuo nome" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="reg-surname">Cognome</label>
+                            <input type="text" id="reg-surname" placeholder="Inserisci il tuo cognome" required>
+                        </div>
+                        <button type="button" class="auth-btn" onclick="nextStep(3)">Avanti</button>
+                        <button type="button" class="auth-btn secondary" onclick="prevStep(1)">Indietro</button>
+                    </div>
+
+                    <!-- Step 3: Preferences -->
+                    <div class="form-step" id="step-3">
+                        <div class="form-group">
+                            <label for="reg-favorite-resort">Comprensorio Preferito</label>
+                            <input type="text" id="reg-favorite-resort" placeholder="Es. Dolomiti Superski">
+                        </div>
+                        <div class="form-group">
+                            <label for="reg-season">Stagione Preferita</label>
+                            <select id="reg-season" required>
+                                <option value="">Seleziona...</option>
+                                <option value="winter">Inverno</option>
+                                <option value="summer">Estate</option>
+                                <option value="both">Entrambe</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="auth-btn">Completa Registrazione</button>
+                        <button type="button" class="auth-btn secondary" onclick="prevStep(2)">Indietro</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Tabs Switching
+        document.querySelectorAll('.auth-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.form-container').forEach(fc => fc.classList.remove('active'));
+                this.classList.add('active');
+                document.getElementById(this.dataset.target).classList.add('active');
+            });
+        });
+
+        // Progressive Registration
+        function nextStep(step) {
+            document.querySelectorAll('.form-step').forEach(fs => fs.classList.remove('active'));
+            document.querySelectorAll('.progress-step').forEach(ps => ps.classList.remove('active'));
+            document.getElementById(`step-${step}`).classList.add('active');
+            document.querySelector(`.progress-step[data-step="${step}"]`).classList.add('active');
+            document.querySelector(`.progress-step[data-step="${step - 1}"]`).classList.add('completed');
+        }
+
+        function prevStep(step) {
+            document.querySelectorAll('.form-step').forEach(fs => fs.classList.remove('active'));
+            document.querySelectorAll('.progress-step').forEach(ps => ps.classList.remove('active', 'completed'));
+            document.getElementById(`step-${step}`).classList.add('active');
+            document.querySelector(`.progress-step[data-step="${step}"]`).classList.add('active');
+            for (let i = 1; i < step; i++) {
+                document.querySelector(`.progress-step[data-step="${i}"]`).classList.add('completed');
+            }
+        }
+
+        // Form Submission (Placeholder)
+        document.querySelectorAll('form').forEach(form => {
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Form inviato! (Funzionalità backend da implementare)');
+            });
+        });
+    </script>
+</body>
+</html>
