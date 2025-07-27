@@ -527,6 +527,7 @@
             nav ul {
                 flex-wrap: wrap;
                 justify-content: center;
+                gap: 1rem;
             }
             
             .nav-cta {
@@ -540,6 +541,146 @@
             
             .features-grid {
                 grid-template-columns: 1fr;
+            }
+        }
+
+        /* Ottimizzazioni per schermi piccoli (telefoni, < 480px) */
+        @media (max-width: 480px) {
+            header {
+                padding: 0.8rem 1rem;
+            }
+
+            .logo-icon {
+                width: 32px;
+                height: 32px;
+                font-size: 1rem;
+            }
+
+            .logo-text {
+                font-size: 1.2rem;
+            }
+
+            nav ul {
+                gap: 0.8rem;
+            }
+
+            nav a {
+                font-size: 0.9rem;
+            }
+
+            .nav-cta {
+                padding: 0.4rem 1rem;
+                font-size: 0.9rem;
+            }
+
+            .hero {
+                padding: 2rem 1rem;
+            }
+
+            .hero-title {
+                font-size: 1.8rem;
+                line-height: 1.3;
+            }
+
+            .hero-subtitle {
+                font-size: 1rem;
+                max-width: 100%;
+            }
+
+            .hero-cta {
+                padding: 0.8rem 1.5rem;
+                font-size: 0.9rem;
+            }
+
+            .hero-image {
+                max-width: 100%;
+                animation: none; /* Disabilita l'animazione float su mobile */
+            }
+
+            .hero-image img {
+                border-radius: var(--radius-md);
+            }
+
+            .features-section {
+                margin: 2rem auto;
+                padding: 0 1rem;
+            }
+
+            .section-title h2 {
+                font-size: 1.6rem;
+            }
+
+            .features-grid {
+                gap: 1.5rem;
+            }
+
+            .feature-card {
+                padding: 1.5rem;
+            }
+
+            .feature-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 1.3rem;
+            }
+
+            .feature-card h3 {
+                font-size: 1.1rem;
+            }
+
+            .feature-card p {
+                font-size: 0.85rem;
+            }
+
+            .feature-cta {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.85rem;
+            }
+
+            footer {
+                padding: 2rem 1rem;
+            }
+
+            .footer-container {
+                gap: 2rem;
+            }
+
+            .footer-logo-icon {
+                width: 24px;
+                height: 24px;
+                font-size: 0.8rem;
+            }
+
+            .footer-logo-text {
+                font-size: 1rem;
+            }
+
+            .footer-about p {
+                font-size: 0.85rem;
+            }
+
+            .social-link {
+                width: 32px;
+                height: 32px;
+            }
+
+            .footer-links h3 {
+                font-size: 1rem;
+            }
+
+            .footer-links a {
+                font-size: 0.85rem;
+            }
+
+            .footer-newsletter input,
+            .footer-newsletter button {
+                padding: 0.6rem;
+                font-size: 0.85rem;
+            }
+
+            .footer-bottom {
+                font-size: 0.8rem;
+                padding-top: 2rem;
             }
         }
     </style>
@@ -664,12 +805,14 @@
     </div>
 
     <script>
-        // Effetto parallax per l'hero image
+        // Effetto parallax per l'hero image (disabilitato su mobile)
         window.addEventListener('scroll', function() {
-            const heroImage = document.querySelector('.hero-image');
-            if (heroImage) {
-                const scrollPosition = window.pageYOffset;
-                heroImage.style.transform = `translateY(${scrollPosition * 0.3}px)`;
+            if (window.innerWidth > 480) {
+                const heroImage = document.querySelector('.hero-image');
+                if (heroImage) {
+                    const scrollPosition = window.pageYOffset;
+                    heroImage.style.transform = `translateY(${scrollPosition * 0.3}px)`;
+                }
             }
         });
     </script>
