@@ -2,32 +2,21 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.2, user-scalable=yes">
-    <title>Lift Explorer | Home</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lift Explorer | Database Impianti</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #2B9348;
-            --primary-dark: #218838;
-            --primary-light: #E6F4EA;
-            --secondary: #FF9E00;
-            --secondary-dark: #E68A00;
-            --accent: #D90429;
-            --text: #2D3748;
-            --text-light: #718096;
-            --bg: #FFFFFF;
-            --card-bg: #F8F9FA;
-            --section-bg: #F7FAFC;
-            --shadow-sm: 0 1px 3px rgba(0,0,0,0.12);
-            --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
-            --shadow-lg: 0 10px 25px rgba(0,0,0,0.1);
-            --radius-sm: 8px;
-            --radius-md: 12px;
-            --radius-lg: 16px;
-            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --primary: #00d084;
+            --secondary: #ff6b35;
+            --dark: #0a0a0a;
+            --light: #ffffff;
+            --gray: #1a1a1a;
+            --gray-light: #2a2a2a;
+            --text-muted: #888;
+            --radius: 16px;
+            --transition: cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         * {
@@ -37,645 +26,833 @@
         }
 
         body {
-            font-family: 'Poppins', sans-serif;
-            color: var(--text);
-            background-color: var(--bg);
-            line-height: 1.5;
-            overflow-x: hidden;
-        }
-
-        .alpine-pattern {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('data:image/svg+xml;base64,...'); /* Pattern invariato */
-            z-index: -1;
-            pointer-events: none;
-        }
-
-        .app-container {
-            display: grid;
-            grid-template-rows: auto 1fr auto;
+            font-family: 'Space Grotesk', sans-serif;
+            background: var(--dark);
+            color: var(--light);
             min-height: 100vh;
+            line-height: 1.6;
         }
 
         /* Header */
-        header {
-            background-color: rgba(255, 255, 255, 0.9);
-            padding: 1rem 2rem;
-            box-shadow: var(--shadow-sm);
+        .header {
+            background: var(--gray);
+            border-bottom: 1px solid var(--gray-light);
+            padding: 1.5rem 2rem;
             position: sticky;
             top: 0;
             z-index: 100;
-            backdrop-filter: blur(5px);
         }
 
-        .header-container {
+        .header-content {
             max-width: 1400px;
             margin: 0 auto;
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1.5rem;
         }
 
-        .logo {
+        .brand {
             display: flex;
             align-items: center;
             gap: 12px;
-            text-decoration: none;
         }
 
-        .logo-icon {
+        .logo {
             width: 40px;
             height: 40px;
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            border-radius: var(--radius-sm);
+            background: linear-gradient(135deg, var(--primary), #00a86b);
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-weight: bold;
-            font-size: 1.2rem;
-            transition: transform 0.4s ease;
+            font-weight: 700;
+            font-size: 1rem;
         }
 
-        .logo:hover .logo-icon {
-            transform: rotate(360deg);
-        }
-
-        .logo-text {
+        .brand-text h1 {
             font-size: 1.5rem;
             font-weight: 700;
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.5px;
         }
 
-        nav {
-            display: flex;
-            align-items: center;
-        }
-
-        .nav-menu {
-            display: flex;
-            gap: 1.5rem;
-            list-style: none;
-        }
-
-        nav a {
-            color: var(--text);
-            text-decoration: none;
+        .brand-text span {
+            font-size: 0.85rem;
+            color: var(--text-muted);
             font-weight: 500;
-            padding: 0.5rem 0;
-            position: relative;
         }
 
-        nav a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            transition: var(--transition);
-        }
-
-        nav a:hover::after,
-        nav a.active::after {
-            width: 100%;
-        }
-
-        .nav-cta {
-            background: linear-gradient(to right, var(--primary), var(--primary-dark));
-            color: white;
-            padding: 0.5rem 1.5rem;
-            border-radius: 50px;
-            margin-left: 1rem;
-            box-shadow: 0 4px 15px rgba(43, 147, 72, 0.3);
-            transition: var(--transition);
-        }
-
-        .nav-cta:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(43, 147, 72, 0.4);
-        }
-
-        .hamburger {
-            display: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: var(--text);
-        }
-
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(135deg, rgba(43, 147, 72, 0.1), rgba(255, 158, 0, 0.1));
-            padding: 4rem 2rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: center;
-        }
-
-        .hero-title {
-            font-size: 3rem;
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-            line-height: 1.2;
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .hero-subtitle {
-            font-size: 1.2rem;
-            color: var(--text-light);
-            margin-bottom: 2rem;
-            max-width: 90%;
-        }
-
-        .hero-cta {
-            background: linear-gradient(to right, var(--primary), var(--primary-dark));
-            color: white;
-            border: none;
-            padding: 1rem 2rem;
-            border-radius: 50px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: var(--transition);
-            box-shadow: var(--shadow-sm);
-            text-decoration: none;
-            display: inline-block;
-        }
-
-        .hero-cta:hover {
-            transform: scale(1.05);
-            box-shadow: 0 6px 15px rgba(43, 147, 72, 0.3);
-        }
-
-        .hero-image {
-            position: relative;
-            transform-style: preserve-3d;
-        }
-
-        .hero-image img {
-            width: 100%;
-            height: auto;
-            border-radius: var(--radius-lg);
-            box-shadow: var(--shadow-lg);
-            object-fit: cover;
-            aspect-ratio: 16/9;
-            transition: transform 0.5s ease;
-        }
-
-        /* Features Section */
-        .features-section {
-            max-width: 1400px;
-            margin: 4rem auto;
-            padding: 0 2rem;
-        }
-
-        .section-title h2 {
-            font-size: 2rem;
-            font-weight: 700;
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 80px;
-            height: 4px;
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            margin: 0.5rem auto 0;
-            border-radius: 2px;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .feature-card {
-            background: var(--bg);
-            border-radius: var(--radius-md);
-            box-shadow: var(--shadow-md);
-            padding: 2rem;
-            text-align: center;
-            transition: transform 0.5s ease, box-shadow 0.5s ease;
-            transform-style: preserve-3d;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-10px) rotateX(5deg) rotateY(5deg);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .feature-icon {
-            width: 60px;
-            height: 60px;
-            background: var(--primary-light);
-            border-radius: 50%;
+        /* Controls */
+        .controls {
             display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
             align-items: center;
-            justify-content: center;
-            margin: 0 auto 1rem;
-            color: var(--primary);
-            font-size: 1.5rem;
-            transition: transform 0.4s ease;
         }
 
-        .feature-card:hover .feature-icon {
-            transform: scale(1.2) rotate(360deg);
+        .search-box {
+            position: relative;
         }
 
-        .feature-cta {
-            background: linear-gradient(to right, var(--primary), var(--primary-dark));
-            color: white;
-            padding: 0.8rem 1.5rem;
+        .search-box input {
+            background: var(--gray-light);
+            border: 1px solid #333;
             border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: var(--transition);
+            padding: 0.75rem 1rem 0.75rem 2.5rem;
+            color: var(--light);
+            font-family: inherit;
+            font-size: 0.9rem;
+            width: 280px;
+            transition: all 0.3s var(--transition);
         }
 
-        .feature-cta:hover {
-            transform: scale(1.05);
-            box-shadow: 0 6px 15px rgba(43, 147, 72, 0.3);
+        .search-box input:focus {
+            outline: none;
+            border-color: var(--primary);
+            width: 320px;
         }
 
-        /* Footer */
-        footer {
-            background: var(--text);
-            color: white;
-            padding: 4rem 2rem 2rem;
+        .search-box i {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
         }
 
-        .footer-container {
+        .filter-select {
+            background: var(--gray-light);
+            border: 1px solid #333;
+            border-radius: 50px;
+            padding: 0.75rem 1.5rem;
+            color: var(--light);
+            font-family: inherit;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s var(--transition);
+        }
+
+        .filter-select:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        /* Main Content */
+        .main {
             max-width: 1400px;
             margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 3rem;
+            padding: 2rem;
         }
 
-        .footer-newsletter input {
-            width: 100%;
-            padding: 0.8rem 1rem;
-            border: none;
-            border-radius: var(--radius-sm);
-            margin-bottom: 1rem;
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
+        .stats-bar {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+            color: var(--text-muted);
         }
 
-        .footer-newsletter button {
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            color: white;
-            border: none;
-            padding: 0.8rem 1.5rem;
-            border-radius: var(--radius-sm);
-            cursor: pointer;
+        .stats-bar span {
+            color: var(--light);
             font-weight: 600;
-            transition: var(--transition);
         }
 
-        /* Loader */
-        .loader {
+        /* Table Container */
+        .table-container {
+            background: var(--gray);
+            border-radius: var(--radius);
+            overflow: hidden;
+            border: 1px solid var(--gray-light);
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+            max-height: 70vh;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        thead {
+            background: var(--gray-light);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        th {
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            user-select: none;
+            transition: color 0.3s;
+            white-space: nowrap;
+        }
+
+        th:hover {
+            color: var(--primary);
+        }
+
+        th i {
+            margin-left: 0.5rem;
+            font-size: 0.7rem;
+            opacity: 0.5;
+        }
+
+        td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--gray-light);
+            vertical-align: middle;
+        }
+
+        tbody tr {
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        tbody tr:hover {
+            background: rgba(255,255,255,0.03);
+        }
+
+        /* Status Badges */
+        .status {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .status::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+        }
+
+        .status.active {
+            background: rgba(0, 208, 132, 0.15);
+            color: var(--primary);
+        }
+
+        .status.active::before {
+            background: var(--primary);
+            box-shadow: 0 0 8px var(--primary);
+        }
+
+        .status.dismessa {
+            background: rgba(255, 107, 53, 0.15);
+            color: var(--secondary);
+        }
+
+        .status.dismessa::before {
+            background: var(--secondary);
+        }
+
+        .status.other {
+            background: rgba(136, 136, 136, 0.15);
+            color: var(--text-muted);
+        }
+
+        .status.other::before {
+            background: var(--text-muted);
+        }
+
+        /* Detail Panel */
+        .detail-panel {
             position: fixed;
             top: 0;
-            left: 0;
+            right: -500px;
             width: 100%;
-            height: 100%;
-            background: var(--bg);
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            max-width: 450px;
+            height: 100vh;
+            background: var(--gray);
+            border-left: 1px solid var(--gray-light);
             z-index: 1000;
-            transition: opacity 0.5s ease;
+            transition: right 0.4s var(--transition);
+            overflow-y: auto;
         }
 
-        .loader.hidden {
+        .detail-panel.open {
+            right: 0;
+        }
+
+        .detail-header {
+            padding: 2rem;
+            border-bottom: 1px solid var(--gray-light);
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .detail-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .detail-subtitle {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            transition: color 0.3s;
+        }
+
+        .close-btn:hover {
+            color: var(--light);
+        }
+
+        .detail-content {
+            padding: 2rem;
+        }
+
+        .detail-section {
+            margin-bottom: 2rem;
+        }
+
+        .detail-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .detail-value {
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        .detail-value.empty {
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        .notes-box {
+            background: var(--gray-light);
+            padding: 1rem;
+            border-radius: 8px;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        .overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.7);
             opacity: 0;
-            pointer-events: none;
+            visibility: hidden;
+            transition: all 0.3s;
+            z-index: 999;
+        }
+
+        .overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: var(--text-muted);
+        }
+
+        .empty-state i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+
+        /* Loading */
+        .loading {
+            text-align: center;
+            padding: 4rem;
+            color: var(--text-muted);
+        }
+
+        .loading i {
+            font-size: 2rem;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
         }
 
         /* Responsive */
-        @media (max-width: 1024px) {
-            .hero-container {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-            .hero-subtitle {
-                margin: 0 auto;
-            }
-            .hero-image {
-                max-width: 500px;
-                margin: 0 auto;
-            }
-        }
-
         @media (max-width: 768px) {
-            .hamburger {
-                display: block;
-            }
-            .nav-menu {
-                display: none;
+            .header-content {
                 flex-direction: column;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background: var(--bg);
-                padding: 1rem;
-                box-shadow: var(--shadow-sm);
+                align-items: stretch;
             }
-            .nav-menu.active {
-                display: flex;
-            }
-            .nav-cta {
-                margin: 0;
-            }
-            .hero-title {
-                font-size: 2rem;
-            }
-        }
 
-        @media (max-width: 480px) {
-            body {
-                font-size: 12px;
-                line-height: 1.4;
+            .controls {
+                width: 100%;
             }
-            header {
-                padding: 0.5rem 0.6rem;
+
+            .search-box input,
+            .search-box input:focus {
+                width: 100%;
             }
-            .logo-icon {
-                width: 24px;
-                height: 24px;
-                font-size: 0.8rem;
+
+            .filter-select {
+                flex: 1;
             }
-            .logo-text {
-                font-size: 1rem;
+
+            .main {
+                padding: 1rem;
             }
-            .hero {
-                padding: 1rem 0.6rem;
+
+            .detail-panel {
+                max-width: 100%;
             }
-            .hero-title {
-                font-size: 1.4rem;
+
+            th, td {
+                padding: 0.75rem;
+                font-size: 0.85rem;
             }
-            .hero-cta {
-                padding: 0.5rem 1rem;
-                font-size: 0.75rem;
-            }
-            .features-section {
-                margin: 1rem auto;
-                padding: 0 0.6rem;
-            }
-            .section-title h2 {
-                font-size: 1.2rem;
+
+            .hide-mobile {
+                display: none;
             }
         }
     </style>
 </head>
 <body>
-    <div class="loader">
-        <i class="fas fa-ski-lift fa-spin" style="font-size: 3rem; color: var(--primary);"></i>
-    </div>
-    <div class="alpine-pattern"></div>
-    <div class="app-container">
-        <header>
-            <div class="header-container">
-                <a href="index.html" class="logo">
-                    <div class="logo-icon">LE</div>
-                    <div class="logo-text">Lift Explorer</div>
-                </a>
-                <nav>
-                    <i class="fas fa-bars hamburger"></i>
-                    <ul class="nav-menu">
-                        <li><a href="index.html" class="active">Home</a></li>
-                        <li><a href="impianti.html">Impianti</a></li>
-                        <li><a href="comprensori.html">Comprensori</a></li>
-                        <li><a href="mappa.html">Mappa</a></li>
-                        <li><a href="profile.html" class="nav-cta">Profilo</a></li>
-                    </ul>
-                </nav>
-            </div>
-        </header>
 
-        <section class="hero">
-            <div class="hero-container">
-                <div class="hero-content">
-                    <h1 class="hero-title">Benvenuto su Lift Explorer</h1>
-                    <p class="hero-subtitle">Esplora impianti di risalita, comprensori sciistici, mappe interattive e personalizza la tua esperienza con un profilo utente dedicato.</p>
-                    <a href="login.html" class="hero-cta">Inizia Ora</a>
-                </div>
-                <div class="hero-image">
-                    <img loading="lazy" src="https://images.unsplash.com/photo-1605540436563-5bca919ae766?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Montagne e impianti">
+    <header class="header">
+        <div class="header-content">
+            <div class="brand">
+                <div class="logo">LE</div>
+                <div class="brand-text">
+                    <h1>LiftExplorer</h1>
+                    <span>Database Impianti di Risalita</span>
                 </div>
             </div>
-        </section>
+            <div class="controls">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="searchInput" placeholder="Cerca per nome, luogo o costruttore...">
+                </div>
+                <select class="filter-select" id="statusFilter">
+                    <option value="">Tutti gli stati</option>
+                    <option value="In servizio">In servizio</option>
+                    <option value="Dismessa">Dismessa</option>
+                    <option value="In costruzione">In costruzione</option>
+                    <option value="Progettata">Progettata</option>
+                </select>
+            </div>
+        </div>
+    </header>
 
-        <section class="features-section">
-            <div class="section-title">
-                <h2>Scopri le Nostre Funzionalità</h2>
-            </div>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon"><i class="fas fa-ski-lift"></i></div>
-                    <h3>Esplora gli Impianti</h3>
-                    <p>Scopri tutti gli impianti di risalita con dettagli tecnici, recensioni e due modalità di visualizzazione: griglia con foto o lista dettagliata.</p>
-                    <a href="impianti.html" class="feature-cta">Vai agli Impianti</a>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon"><i class="fas fa-mountain"></i></div>
-                    <h3>Comprensori Sciistici</h3>
-                    <p>Esplora i migliori comprensori sciistici, filtra per stagione (inverno/estate) e scopri statistiche su piste e impianti.</p>
-                    <a href="comprensori.html" class="feature-cta">Vai ai Comprensori</a>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon"><i class="fas fa-map-marked-alt"></i></div>
-                    <h3>Mappa Interattiva</h3>
-                    <p>Visualizza gli impianti su una mappa interattiva con filtri per stagione e stato in tempo reale.</p>
-                    <a href="mappa.html" class="feature-cta">Esplora la Mappa</a>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon"><i class="fas fa-user"></i></div>
-                    <h3>Il Tuo Profilo</h3>
-                    <p>Crea un account per salvare gli impianti visitati, lasciare recensioni e personalizzare la tua esperienza.</p>
-                    <a href="profile.html" class="feature-cta">Accedi al Profilo</a>
-                </div>
-            </div>
-        </section>
+    <main class="main">
+        <div class="stats-bar">
+            <div>Totale impianti: <span id="totalCount">0</span></div>
+            <div>Filtrati: <span id="filteredCount">0</span></div>
+        </div>
 
-        <footer>
-            <div class="footer-container">
-                <div class="footer-about">
-                    <div class="footer-logo">
-                        <div class="footer-logo-icon">LE</div>
-                        <div class="footer-logo-text">Lift Explorer</div>
-                    </div>
-                    <p>La più completa guida agli impianti di risalita in Italia e Europa, con dati tecnici, mappe interattive e informazioni in tempo reale.</p>
-                    <div class="social-links">
-                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
-                    </div>
+        <div class="table-container">
+            <div class="table-wrapper" id="tableWrapper">
+                <div class="loading" id="loading">
+                    <i class="fas fa-circle-notch"></i>
+                    <p>Caricamento dati...</p>
                 </div>
-                <div class="footer-links">
-                    <h3>Esplora</h3>
-                    <ul>
-                        <li><a href="impianti.html">Impianti</a></li>
-                        <li><a href="comprensori.html">Comprensori</a></li>
-                        <li><a href="mappa.html">Mappa</a></li>
-                        <li><a href="profile.html">Profilo</a></li>
-                    </ul>
-                </div>
-                <div class="footer-links">
-                    <h3>Risorse</h3>
-                    <ul>
-                        <li><a href="#">Stato Impianti</a></li>
-                        <li><a href="#">Webcam</a></li>
-                        <li><a href="#">Meteo</a></li>
-                        <li><a href="#">Statistiche</a></li>
-                    </ul>
-                </div>
-                <div class="footer-newsletter">
-                    <h3>Newsletter</h3>
-                    <p>Ricevi aggiornamenti sugli impianti e le novità dei comprensori.</p>
-                    <form id="newsletter-form">
-                        <input type="email" id="newsletter-email" placeholder="La tua email" required>
-                        <button type="submit">Iscriviti</button>
-                    </form>
+                <table id="dataTable" style="display: none;">
+                    <thead>
+                        <tr>
+                            <th data-sort="LUOGO">Luogo <i class="fas fa-sort"></i></th>
+                            <th data-sort="PR.">Pr. <i class="fas fa-sort"></i></th>
+                            <th data-sort="TIPOLOGIA">Tipologia <i class="fas fa-sort"></i></th>
+                            <th data-sort="NOME">Nome <i class="fas fa-sort"></i></th>
+                            <th data-sort="COSTRUTTORE">Costruttore <i class="fas fa-sort"></i></th>
+                            <th data-sort="COSTRUZIONE">Costruzione <i class="fas fa-sort"></i></th>
+                            <th data-sort="DISMISSIONE" class="hide-mobile">Dismissione <i class="fas fa-sort"></i></th>
+                            <th data-sort="STATO">Stato <i class="fas fa-sort"></i></th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                    </tbody>
+                </table>
+                <div class="empty-state" id="emptyState" style="display: none;">
+                    <i class="fas fa-search"></i>
+                    <h3>Nessun risultato trovato</h3>
+                    <p>Prova a modificare i criteri di ricerca</p>
                 </div>
             </div>
-            <div class="footer-bottom">
-                <p>© 2025 Lift Explorer. Tutti i diritti riservati.</p>
+        </div>
+    </main>
+
+    <!-- Detail Panel -->
+    <div class="overlay" id="overlay"></div>
+    <aside class="detail-panel" id="detailPanel">
+        <div class="detail-header">
+            <div>
+                <div class="detail-title" id="detailName">-</div>
+                <div class="detail-subtitle" id="detailLocation">-</div>
             </div>
-        </footer>
-    </div>
+            <button class="close-btn" id="closeBtn"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="detail-content">
+            <div class="detail-section">
+                <div class="detail-label">Resort</div>
+                <div class="detail-value" id="detailResort">-</div>
+            </div>
+            <div class="detail-section">
+                <div class="detail-label">Comprensorio</div>
+                <div class="detail-value" id="detailComprensorio">-</div>
+            </div>
+            <div class="detail-section">
+                <div class="detail-label">Zona</div>
+                <div class="detail-value" id="detailZona">-</div>
+            </div>
+            <div class="detail-section">
+                <div class="detail-label">Note</div>
+                <div class="notes-box" id="detailNote">Nessuna nota disponibile</div>
+            </div>
+        </div>
+    </aside>
 
     <script>
-        // GSAP Animations
-        gsap.from('.hero-title', { y: 50, opacity: 0, duration: 1, ease: 'power3.out' });
-        gsap.from('.hero-subtitle', { y: 50, opacity: 0, duration: 1, delay: 0.2, ease: 'power3.out' });
-        gsap.from('.hero-cta', { y: 50, opacity: 0, duration: 1, delay: 0.4, ease: 'power3.out' });
-
-        gsap.utils.toArray('.feature-card').forEach(card => {
-            gsap.from(card, {
-                y: 50,
-                opacity: 0,
-                duration: 0.8,
-                scrollTrigger: {
-                    trigger: card,
-                    start: 'top 80%',
-                    toggleActions: 'play none none none'
+        // Configurazione
+        const CONFIG = {
+            dataUrl: 'dati.json',
+            fallbackData: [
+                {
+                    "LUOGO": "Cortina d'Ampezzo",
+                    "PR.": "BL",
+                    "TIPOLOGIA": "Cabinovia",
+                    "NOME": "Faloria",
+                    "COSTRUTTORE": "Leitner",
+                    "COSTRUZIONE": 2020,
+                    "DISMISSIONE": null,
+                    "STATO": "In servizio",
+                    "Resort": "Cortina",
+                    "Comprensorio": "Dolomiti Superski",
+                    "Zona": "Faloria-Cristallo",
+                    "Note": "Impianto rinnovato per le Olimpiadi 2026"
+                },
+                {
+                    "LUOGO": "Breuil-Cervinia",
+                    "PR.": "AO",
+                    "TIPOLOGIA": "Funivia",
+                    "NOME": "Plateau Rosa",
+                    "COSTRUTTORE": "Poma",
+                    "COSTRUZIONE": 2012,
+                    "DISMISSIONE": null,
+                    "STATO": "In servizio",
+                    "Resort": "Cervinia",
+                    "Comprensorio": "Matterhorn Ski Paradise",
+                    "Zona": "Plateau Rosa",
+                    "Note": null
+                },
+                {
+                    "LUOGO": "Sestriere",
+                    "PR.": "TO",
+                    "TIPOLOGIA": "Seggiovia",
+                    "NOME": "Banchetta",
+                    "COSTRUTTORE": "Doppelmayr",
+                    "COSTRUZIONE": 1998,
+                    "DISMISSIONE": 2018,
+                    "STATO": "Dismessa",
+                    "Resort": "Via Lattea",
+                    "Comprensorio": "Milky Way",
+                    "Zona": "Colle di Sestriere",
+                    "Note": "Sostituita con nuova seggiovia a 6 posti"
                 }
-            });
-        });
+            ]
+        };
 
-        // Parallax Effect with Mouse Interaction
-        const heroImage = document.querySelector('.hero-image');
-        if (window.innerWidth > 480) {
-            heroImage.addEventListener('mousemove', (e) => {
-                const rect = heroImage.getBoundingClientRect();
-                const x = (e.clientX - rect.left) / rect.width - 0.5;
-                const y = (e.clientY - rect.top) / rect.height - 0.5;
-                gsap.to(heroImage, {
-                    rotationY: x * 10,
-                    rotationX: -y * 10,
-                    ease: 'power2.out',
-                    duration: 0.5
-                });
-            });
+        // Stato applicazione
+        let allData = [];
+        let filteredData = [];
+        let currentSort = { column: null, direction: 'asc' };
 
-            heroImage.addEventListener('mouseleave', () => {
-                gsap.to(heroImage, {
-                    rotationY: 0,
-                    rotationX: 0,
-                    ease: 'power2.out',
-                    duration: 0.5
-                });
-            });
+        // Elementi DOM
+        const elements = {
+            searchInput: document.getElementById('searchInput'),
+            statusFilter: document.getElementById('statusFilter'),
+            tableBody: document.getElementById('tableBody'),
+            table: document.getElementById('dataTable'),
+            loading: document.getElementById('loading'),
+            emptyState: document.getElementById('emptyState'),
+            totalCount: document.getElementById('totalCount'),
+            filteredCount: document.getElementById('filteredCount'),
+            detailPanel: document.getElementById('detailPanel'),
+            overlay: document.getElementById('overlay'),
+            closeBtn: document.getElementById('closeBtn')
+        };
 
-            ScrollTrigger.create({
-                trigger: '.hero',
-                onUpdate: (self) => {
-                    gsap.to(heroImage, {
-                        y: self.progress * 50,
-                        ease: 'power2.out'
-                    });
-                }
+        // Inizializzazione
+        async function init() {
+            try {
+                await loadData();
+                setupEventListeners();
+                renderTable();
+            } catch (error) {
+                console.error('Errore inizializzazione:', error);
+                showError('Errore nel caricamento dei dati');
+            }
+        }
+
+        // Caricamento dati
+        async function loadData() {
+            try {
+                const response = await fetch(CONFIG.dataUrl);
+                if (!response.ok) throw new Error('File non trovato');
+                allData = await response.json();
+            } catch (error) {
+                console.warn('Usando dati fallback:', error.message);
+                allData = CONFIG.fallbackData;
+            }
+            filteredData = [...allData];
+            updateStats();
+        }
+
+        // Event Listeners
+        function setupEventListeners() {
+            // Ricerca in tempo reale
+            elements.searchInput.addEventListener('input', debounce(handleSearch, 300));
+            
+            // Filtro stato
+            elements.statusFilter.addEventListener('change', handleFilter);
+            
+            // Ordinamento
+            document.querySelectorAll('th[data-sort]').forEach(th => {
+                th.addEventListener('click', () => handleSort(th.dataset.sort));
+            });
+            
+            // Chiusura pannello dettagli
+            elements.closeBtn.addEventListener('click', closeDetailPanel);
+            elements.overlay.addEventListener('click', closeDetailPanel);
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') closeDetailPanel();
             });
         }
 
-        // Hamburger Menu
-        const hamburger = document.querySelector('.hamburger');
-        const navMenu = document.querySelector('.nav-menu');
-        hamburger.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
-            hamburger.classList.toggle('fa-times');
-            hamburger.classList.toggle('fa-bars');
-        });
+        // Debounce per ricerca
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
 
-        // Active Nav Link
-        const navLinks = document.querySelectorAll('.nav-menu a');
-        navLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                navLinks.forEach(l => l.classList.remove('active'));
-                link.classList.add('active');
-                if (window.innerWidth <= 768) {
-                    navMenu.classList.remove('active');
-                    hamburger.classList.remove('fa-times');
-                    hamburger.classList.add('fa-bars');
-                }
+        // Gestione ricerca
+        function handleSearch() {
+            const query = elements.searchInput.value.toLowerCase().trim();
+            applyFilters(query, elements.statusFilter.value);
+        }
+
+        // Gestione filtro stato
+        function handleFilter() {
+            const query = elements.searchInput.value.toLowerCase().trim();
+            applyFilters(query, elements.statusFilter.value);
+        }
+
+        // Applica filtri combinati
+        function applyFilters(searchQuery, statusFilter) {
+            filteredData = allData.filter(item => {
+                const matchesSearch = !searchQuery || 
+                    (item.NOME && item.NOME.toLowerCase().includes(searchQuery)) ||
+                    (item.LUOGO && item.LUOGO.toLowerCase().includes(searchQuery)) ||
+                    (item.COSTRUTTORE && item.COSTRUTTORE.toLowerCase().includes(searchQuery));
+                
+                const matchesStatus = !statusFilter || item.STATO === statusFilter;
+                
+                return matchesSearch && matchesStatus;
             });
-        });
+            
+            updateStats();
+            renderTable();
+        }
 
-        // Newsletter Form Validation
-        const newsletterForm = document.getElementById('newsletter-form');
-        newsletterForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const email = document.getElementById('newsletter-email').value;
-            if (/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
-                alert('Iscrizione avvenuta con successo!');
-                newsletterForm.reset();
+        // Gestione ordinamento
+        function handleSort(column) {
+            // Toggle direzione
+            if (currentSort.column === column) {
+                currentSort.direction = currentSort.direction === 'asc' ? 'desc' : 'asc';
             } else {
-                alert('Per favore, inserisci un indirizzo email valido.');
+                currentSort.column = column;
+                currentSort.direction = 'asc';
             }
-        });
-
-        // Lazy Loading and Loader
-        window.addEventListener('load', () => {
-            document.querySelector('.loader').classList.add('hidden');
-            gsap.to('.loader', { opacity: 0, duration: 0.5, onComplete: () => {
-                document.querySelector('.loader').style.display = 'none';
-            }});
-        });
-
-        // Intersection Observer for Lazy Loading Images
-        const images = document.querySelectorAll('img[loading="lazy"]');
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.src = entry.target.dataset.src || entry.target.src;
-                    observer.unobserve(entry.target);
-                }
+            
+            // Aggiorna icone
+            document.querySelectorAll('th i').forEach(icon => {
+                icon.className = 'fas fa-sort';
             });
-        }, { rootMargin: '0px 0px 100px 0px' });
-        images.forEach(img => observer.observe(img));
+            const activeHeader = document.querySelector(`th[data-sort="${column}"] i`);
+            if (activeHeader) {
+                activeHeader.className = `fas fa-sort-${currentSort.direction === 'asc' ? 'up' : 'down'}`;
+            }
+            
+            // Ordina dati
+            filteredData.sort((a, b) => {
+                let valA = a[column] || '';
+                let valB = b[column] || '';
+                
+                // Gestione numeri
+                if (typeof valA === 'number' && typeof valB === 'number') {
+                    return currentSort.direction === 'asc' ? valA - valB : valB - valA;
+                }
+                
+                // Gestione stringhe
+                valA = String(valA).toLowerCase();
+                valB = String(valB).toLowerCase();
+                
+                if (valA < valB) return currentSort.direction === 'asc' ? -1 : 1;
+                if (valA > valB) return currentSort.direction === 'asc' ? 1 : -1;
+                return 0;
+            });
+            
+            renderTable();
+        }
+
+        // Rendering tabella
+        function renderTable() {
+            elements.loading.style.display = 'none';
+            
+            if (filteredData.length === 0) {
+                elements.table.style.display = 'none';
+                elements.emptyState.style.display = 'block';
+                return;
+            }
+            
+            elements.table.style.display = 'table';
+            elements.emptyState.style.display = 'none';
+            
+            elements.tableBody.innerHTML = filteredData.map((item, index) => {
+                const statusClass = getStatusClass(item.STATO);
+                const dismissione = formatNumber(item.DISMISSIONE);
+                
+                return `
+                    <tr onclick="openDetail(${index})">
+                        <td>${escapeHtml(item.LUOGO)}</td>
+                        <td>${escapeHtml(item['PR.'])}</td>
+                        <td>${escapeHtml(item.TIPOLOGIA)}</td>
+                        <td><strong>${escapeHtml(item.NOME)}</strong></td>
+                        <td>${escapeHtml(item.COSTRUTTORE)}</td>
+                        <td>${formatNumber(item.COSTRUZIONE)}</td>
+                        <td class="hide-mobile">${dismissione}</td>
+                        <td><span class="status ${statusClass}">${escapeHtml(item.STATO)}</span></td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        // Determina classe stato
+        function getStatusClass(stato) {
+            if (!stato) return 'other';
+            const normalized = stato.toLowerCase();
+            if (normalized.includes('servizio')) return 'active';
+            if (normalized.includes('dismess')) return 'dismessa';
+            return 'other';
+        }
+
+        // Formatta numeri (gestisce null)
+        function formatNumber(value) {
+            if (value === null || value === undefined || value === '') return '-';
+            return parseInt(value);
+        }
+
+        // Escape HTML per sicurezza
+        function escapeHtml(text) {
+            if (!text) return '';
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // Aggiorna statistiche
+        function updateStats() {
+            elements.totalCount.textContent = allData.length;
+            elements.filteredCount.textContent = filteredData.length;
+        }
+
+        // Apri pannello dettagli
+        window.openDetail = function(index) {
+            const item = filteredData[index];
+            if (!item) return;
+            
+            document.getElementById('detailName').textContent = item.NOME || 'N/D';
+            document.getElementById('detailLocation').textContent = 
+                `${item.LUOGO || ''} ${item['PR.'] ? `(${item['PR.']})` : ''}`.trim() || 'Località non specificata';
+            
+            setDetailValue('detailResort', item.Resort);
+            setDetailValue('detailComprensorio', item.Comprensorio);
+            setDetailValue('detailZona', item.Zona);
+            
+            const noteElement = document.getElementById('detailNote');
+            if (item.Note && item.Note.trim()) {
+                noteElement.textContent = item.Note;
+                noteElement.classList.remove('empty');
+            } else {
+                noteElement.textContent = 'Nessuna nota disponibile';
+                noteElement.classList.add('empty');
+            }
+            
+            elements.detailPanel.classList.add('open');
+            elements.overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        };
+
+        // Helper per valori dettaglio
+        function setDetailValue(id, value) {
+            const el = document.getElementById(id);
+            if (value && value.trim()) {
+                el.textContent = value;
+                el.classList.remove('empty');
+            } else {
+                el.textContent = 'Non specificato';
+                el.classList.add('empty');
+            }
+        }
+
+        // Chiudi pannello dettagli
+        function closeDetailPanel() {
+            elements.detailPanel.classList.remove('open');
+            elements.overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Mostra errore
+        function showError(message) {
+            elements.loading.innerHTML = `
+                <i class="fas fa-exclamation-triangle" style="color: var(--secondary);"></i>
+                <p>${message}</p>
+            `;
+        }
+
+        // Avvia applicazione
+        init();
     </script>
+
 </body>
 </html>
