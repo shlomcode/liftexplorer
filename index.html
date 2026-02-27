@@ -15,7 +15,6 @@
             --accent: #00d084;
             --danger: #ff4757;
             --radius: 12px;
-            --safe-bottom: env(safe-area-inset-bottom);
         }
 
         * {
@@ -23,10 +22,6 @@
             padding: 0;
             box-sizing: border-box;
             -webkit-tap-highlight-color: transparent;
-        }
-
-        html {
-            touch-action: manipulation;
         }
 
         body {
@@ -37,7 +32,6 @@
             overflow-x: hidden;
         }
 
-        /* Header */
         header {
             position: fixed;
             top: 0;
@@ -84,12 +78,10 @@
             color: var(--text);
             font-size: 15px;
             outline: none;
-            transition: all 0.2s;
         }
 
         .search-box input:focus {
             border-color: var(--accent);
-            background: var(--surface-hover);
         }
 
         .search-box i {
@@ -111,16 +103,13 @@
             display: grid;
             place-items: center;
             cursor: pointer;
-            transition: all 0.2s;
         }
 
         .filter-btn.active {
             background: var(--accent);
             color: var(--bg);
-            border-color: var(--accent);
         }
 
-        /* Stats */
         .stats {
             max-width: 800px;
             margin: 80px auto 8px;
@@ -136,7 +125,6 @@
             font-weight: 600;
         }
 
-        /* List View (Mobile Optimized) */
         .list-container {
             max-width: 800px;
             margin: 0 auto;
@@ -149,11 +137,11 @@
             padding: 16px;
             margin-bottom: 8px;
             cursor: pointer;
-            transition: all 0.2s;
             border: 1px solid rgba(255,255,255,0.05);
             display: flex;
             align-items: center;
             gap: 12px;
+            transition: transform 0.1s;
         }
 
         .lift-card:active {
@@ -194,38 +182,19 @@
             align-items: center;
         }
 
-        .lift-meta span {
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-
         .status-badge {
             padding: 4px 10px;
             border-radius: 20px;
             font-size: 11px;
             font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
             flex-shrink: 0;
         }
 
-        .status-active {
-            background: rgba(0, 208, 132, 0.15);
-            color: var(--accent);
-        }
+        .status-active { background: rgba(0, 208, 132, 0.15); color: var(--accent); }
+        .status-dismessa { background: rgba(255, 71, 87, 0.15); color: var(--danger); }
+        .status-other { background: rgba(255,255,255,0.1); color: var(--text-secondary); }
 
-        .status-dismessa {
-            background: rgba(255, 71, 87, 0.15);
-            color: var(--danger);
-        }
-
-        .status-other {
-            background: rgba(255,255,255,0.1);
-            color: var(--text-secondary);
-        }
-
-        /* Empty State */
         .empty {
             text-align: center;
             padding: 60px 20px;
@@ -238,7 +207,43 @@
             opacity: 0.3;
         }
 
-        /* Bottom Sheet Detail */
+        .loading {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text-secondary);
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid rgba(255,255,255,0.1);
+            border-top-color: var(--accent);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 16px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .error {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--danger);
+        }
+
+        .retry-btn {
+            margin-top: 16px;
+            padding: 10px 20px;
+            background: var(--surface);
+            border: 1px solid var(--danger);
+            color: var(--danger);
+            border-radius: var(--radius);
+            cursor: pointer;
+        }
+
+        /* Sheet */
         .sheet-overlay {
             position: fixed;
             inset: 0;
@@ -322,11 +327,6 @@
             text-align: right;
         }
 
-        .detail-value.empty {
-            color: var(--text-secondary);
-            font-style: italic;
-        }
-
         .notes-section {
             margin-top: 16px;
             padding: 16px;
@@ -338,14 +338,12 @@
             font-size: 12px;
             text-transform: uppercase;
             color: var(--text-secondary);
-            letter-spacing: 0.5px;
             margin-bottom: 8px;
         }
 
         .notes-text {
             font-size: 14px;
             line-height: 1.6;
-            color: var(--text);
         }
 
         .sheet-close {
@@ -359,15 +357,13 @@
             border-radius: 50%;
             color: var(--text);
             cursor: pointer;
-            display: grid;
-            place-items: center;
         }
 
         /* Filter Modal */
         .filter-modal {
             position: fixed;
             inset: 0;
-            background: rgba(0,0,0,0.9);
+            background: var(--bg);
             z-index: 150;
             display: none;
             flex-direction: column;
@@ -399,11 +395,6 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            transition: all 0.2s;
-        }
-
-        .filter-option:active {
-            background: var(--surface-hover);
         }
 
         .filter-option.selected {
@@ -414,37 +405,10 @@
             color: var(--accent);
         }
 
-        /* Loading */
-        .loading {
-            text-align: center;
-            padding: 40px;
-            color: var(--text-secondary);
-        }
-
-        .spinner {
-            width: 40px;
-            height: 40px;
-            border: 3px solid rgba(255,255,255,0.1);
-            border-top-color: var(--accent);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 16px;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        /* Desktop Table View */
+        /* Desktop */
         @media (min-width: 768px) {
-            .list-container {
-                padding-bottom: 40px;
-            }
-
-            .lift-card {
-                display: none;
-            }
-
+            .lift-card { display: none; }
+            
             .table-view {
                 display: table;
                 width: 100%;
@@ -459,14 +423,8 @@
                 font-weight: 600;
                 font-size: 12px;
                 text-transform: uppercase;
-                letter-spacing: 0.5px;
                 border-bottom: 1px solid rgba(255,255,255,0.1);
                 cursor: pointer;
-                user-select: none;
-            }
-
-            .table-view th:hover {
-                color: var(--accent);
             }
 
             .table-view td {
@@ -498,15 +456,11 @@
                 transform: translate(0, -50%);
             }
 
-            .sheet-handle {
-                display: none;
-            }
+            .sheet-handle { display: none; }
         }
 
         @media (max-width: 767px) {
-            .table-view {
-                display: none;
-            }
+            .table-view { display: none; }
         }
     </style>
 </head>
@@ -526,14 +480,14 @@
     </header>
 
     <div class="stats">
-        <div>Totale: <span id="totalCount">0</span></div>
-        <div>Mostrati: <span id="filteredCount">0</span></div>
+        <div>Totale: <span id="totalCount">-</span></div>
+        <div>Mostrati: <span id="filteredCount">-</span></div>
     </div>
 
     <main class="list-container" id="listContainer">
         <div class="loading" id="loading">
             <div class="spinner"></div>
-            <p>Caricamento...</p>
+            <p>Caricamento dati...</p>
         </div>
     </main>
 
@@ -541,7 +495,7 @@
     <div class="filter-modal" id="filterModal">
         <div class="filter-header">
             <h2 class="filter-title">Filtra per stato</h2>
-            <button class="filter-btn" onclick="closeFilterModal()">
+            <button class="filter-btn" onclick="closeFilterModal()" style="width:36px;height:36px;">
                 <i class="fas fa-times"></i>
             </button>
         </div>
@@ -611,59 +565,63 @@
     </div>
 
     <script>
-        // Dati
-        const data = [
-            {
-                "LUOGO": "Cortina d'Ampezzo",
-                "PR.": "BL",
-                "TIPOLOGIA": "Cabinovia",
-                "NOME": "Faloria",
-                "COSTRUTTORE": "Leitner",
-                "COSTRUZIONE": 2020,
-                "DISMISSIONE": null,
-                "STATO": "In servizio",
-                "Resort": "Cortina",
-                "Comprensorio": "Dolomiti Superski",
-                "Zona": "Faloria-Cristallo",
-                "Note": "Impianto rinnovato per le Olimpiadi 2026"
-            },
-            {
-                "LUOGO": "Breuil-Cervinia",
-                "PR.": "AO",
-                "TIPOLOGIA": "Funivia",
-                "NOME": "Plateau Rosa",
-                "COSTRUTTORE": "Poma",
-                "COSTRUZIONE": 2012,
-                "DISMISSIONE": null,
-                "STATO": "In servizio",
-                "Resort": "Cervinia",
-                "Comprensorio": "Matterhorn Ski Paradise",
-                "Zona": "Plateau Rosa",
-                "Note": null
-            },
-            {
-                "LUOGO": "Sestriere",
-                "PR.": "TO",
-                "TIPOLOGIA": "Seggiovia",
-                "NOME": "Banchetta",
-                "COSTRUTTORE": "Doppelmayr",
-                "COSTRUZIONE": 1998,
-                "DISMISSIONE": 2018,
-                "STATO": "Dismessa",
-                "Resort": "Via Lattea",
-                "Comprensorio": "Milky Way",
-                "Zona": "Colle di Sestriere",
-                "Note": "Sostituita con nuova seggiovia a 6 posti"
-            }
-        ];
+        // Configurazione
+        const CONFIG = {
+            dataUrl: 'dati.json',
+            fallbackData: [
+                {
+                    "LUOGO": "Cortina d'Ampezzo",
+                    "PR.": "BL",
+                    "TIPOLOGIA": "Cabinovia",
+                    "NOME": "Faloria",
+                    "COSTRUTTORE": "Leitner",
+                    "COSTRUZIONE": 2020,
+                    "DISMISSIONE": null,
+                    "STATO": "In servizio",
+                    "Resort": "Cortina",
+                    "Comprensorio": "Dolomiti Superski",
+                    "Zona": "Faloria-Cristallo",
+                    "Note": "Impianto rinnovato per le Olimpiadi 2026"
+                },
+                {
+                    "LUOGO": "Breuil-Cervinia",
+                    "PR.": "AO",
+                    "TIPOLOGIA": "Funivia",
+                    "NOME": "Plateau Rosa",
+                    "COSTRUTTORE": "Poma",
+                    "COSTRUZIONE": 2012,
+                    "DISMISSIONE": null,
+                    "STATO": "In servizio",
+                    "Resort": "Cervinia",
+                    "Comprensorio": "Matterhorn Ski Paradise",
+                    "Zona": "Plateau Rosa",
+                    "Note": null
+                },
+                {
+                    "LUOGO": "Sestriere",
+                    "PR.": "TO",
+                    "TIPOLOGIA": "Seggiovia",
+                    "NOME": "Banchetta",
+                    "COSTRUTTORE": "Doppelmayr",
+                    "COSTRUZIONE": 1998,
+                    "DISMISSIONE": 2018,
+                    "STATO": "Dismessa",
+                    "Resort": "Via Lattea",
+                    "Comprensorio": "Milky Way",
+                    "Zona": "Colle di Sestriere",
+                    "Note": "Sostituita con nuova seggiovia a 6 posti"
+                }
+            ]
+        };
 
         // Stato
-        let filtered = [...data];
+        let allData = [];
+        let filtered = [];
         let currentFilter = '';
         let sortCol = null;
         let sortAsc = true;
 
-        // Icone per tipologia
+        // Icone
         const icons = {
             'Cabinovia': 'fa-cable-car',
             'Funivia': 'fa-mountain',
@@ -671,6 +629,25 @@
             'Skilift': 'fa-arrow-up',
             'default': 'fa-mountain'
         };
+
+        // Inizializzazione
+        async function init() {
+            try {
+                await loadData();
+            } catch (error) {
+                console.warn('Errore caricamento, uso fallback:', error);
+                allData = CONFIG.fallbackData;
+            }
+            filtered = [...allData];
+            setupEventListeners();
+            render();
+        }
+
+        async function loadData() {
+            const response = await fetch(CONFIG.dataUrl);
+            if (!response.ok) throw new Error('HTTP ' + response.status);
+            allData = await response.json();
+        }
 
         function getIcon(tipo) {
             return icons[tipo] || icons.default;
@@ -749,7 +726,7 @@
         }
 
         function updateStats() {
-            document.getElementById('totalCount').textContent = data.length;
+            document.getElementById('totalCount').textContent = allData.length;
             document.getElementById('filteredCount').textContent = filtered.length;
         }
 
@@ -763,7 +740,7 @@
         function filter() {
             const query = document.getElementById('searchInput').value.toLowerCase();
             
-            filtered = data.filter(item => {
+            filtered = allData.filter(item => {
                 const matchesSearch = !query || 
                     (item.NOME?.toLowerCase().includes(query)) ||
                     (item.LUOGO?.toLowerCase().includes(query)) ||
@@ -774,10 +751,7 @@
                 return matchesSearch && matchesStatus;
             });
 
-            if (sortCol) {
-                sortData();
-            }
-            
+            if (sortCol) sortData();
             render();
         }
 
@@ -840,28 +814,40 @@
             document.getElementById('detailSheet').classList.remove('active');
         }
 
-        // Filter Modal
-        document.getElementById('filterBtn').addEventListener('click', () => {
-            document.getElementById('filterModal').classList.add('active');
-        });
-
         function closeFilterModal() {
             document.getElementById('filterModal').classList.remove('active');
         }
 
-        document.querySelectorAll('.filter-option').forEach(opt => {
-            opt.addEventListener('click', function() {
-                document.querySelectorAll('.filter-option').forEach(o => o.classList.remove('selected'));
-                this.classList.add('selected');
-                currentFilter = this.dataset.value;
-                closeFilterModal();
-                filter();
+        function setupEventListeners() {
+            // Search
+            document.getElementById('searchInput').addEventListener('input', debounce(filter, 300));
+            
+            // Filter modal
+            document.getElementById('filterBtn').addEventListener('click', () => {
+                document.getElementById('filterModal').classList.add('active');
             });
-        });
-
-        // Event listeners
-        document.getElementById('searchInput').addEventListener('input', debounce(filter, 300));
-        document.getElementById('sheetOverlay').addEventListener('click', closeDetail);
+            
+            document.querySelectorAll('.filter-option').forEach(opt => {
+                opt.addEventListener('click', function() {
+                    document.querySelectorAll('.filter-option').forEach(o => o.classList.remove('selected'));
+                    this.classList.add('selected');
+                    currentFilter = this.dataset.value;
+                    closeFilterModal();
+                    filter();
+                });
+            });
+            
+            // Close sheet
+            document.getElementById('sheetOverlay').addEventListener('click', closeDetail);
+            
+            // Escape key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    closeDetail();
+                    closeFilterModal();
+                }
+            });
+        }
 
         function debounce(fn, wait) {
             let timeout;
@@ -871,7 +857,7 @@
             };
         }
 
-        // Swipe to close sheet
+        // Swipe to close
         let touchStartY = 0;
         const sheet = document.getElementById('detailSheet');
         
@@ -895,11 +881,8 @@
             sheet.style.transform = '';
         });
 
-        // Init
-        setTimeout(() => {
-            document.getElementById('loading').style.display = 'none';
-            render();
-        }, 500);
+        // Avvia
+        init();
     </script>
 </body>
 </html>
